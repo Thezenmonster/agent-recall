@@ -164,6 +164,31 @@ mem.loadState(); // Next session picks up here
 | `context` | *(default)* | "This repo uses pnpm monorepo" |
 | `session` | *(via save_state)* | Working state between sessions |
 
+## Works Great With AgentScore
+
+[@agentscore-xyz/mcp-server](https://www.npmjs.com/package/@agentscore-xyz/mcp-server) lets your AI check the trust score of other AI agents. Pair it with agent-recall and your agent checks trust once, remembers it across sessions:
+
+1. Agent calls `check_agent_trust("EmberFoundry")` → gets a 0-100 trust score
+2. Agent calls `remember("EmberFoundry: trust score 14/100, UNVERIFIED band")` → stored locally
+3. Next session: `recall("EmberFoundry trust")` → instant, no network call
+
+```json
+{
+  "mcpServers": {
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "agent-recall"]
+    },
+    "agentscore": {
+      "command": "npx",
+      "args": ["-y", "@agentscore-xyz/mcp-server"]
+    }
+  }
+}
+```
+
+Two tools, clean separation. Memory stays local, trust scoring stays in the cloud.
+
 ## License
 
 MIT
