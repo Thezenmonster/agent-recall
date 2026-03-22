@@ -1,0 +1,58 @@
+{
+  "name": "agent-recall",
+  "version": "0.1.0",
+  "description": "Your AI coding assistant forgets everything between sessions. Fix it in one command.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "agent-recall": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "memory",
+    "agent",
+    "ai",
+    "llm",
+    "sqlite",
+    "fts5",
+    "claude",
+    "cursor",
+    "copilot",
+    "model-context-protocol",
+    "recall"
+  ],
+  "author": "Michael Onyek",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thezenmonster/agent-recall.git"
+  },
+  "homepage": "https://github.com/Thezenmonster/agent-recall#readme",
+  "bugs": {
+    "url": "https://github.com/Thezenmonster/agent-recall/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/better-sqlite3": "^7.6.0",
+    "@types/node": "^20.0.0",
+    "vitest": "^2.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
