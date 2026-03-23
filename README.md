@@ -164,6 +164,26 @@ mem.loadState(); // Next session picks up here
 | `context` | *(default)* | "This repo uses pnpm monorepo" |
 | `session` | *(via save_state)* | Working state between sessions |
 
+## Knowledge Packs
+
+Pre-built memories that make your agent instantly smarter. Install domain expertise in one command.
+
+```bash
+npx agent-recall install @packs/ffmpeg
+npx agent-recall install @packs/youtube-api
+npx agent-recall install @packs/python-audio
+```
+
+| Pack | Memories | Covers |
+|------|----------|--------|
+| `@packs/ffmpeg` | 12 | loudnorm, amix, concat, zoompan, sample rates |
+| `@packs/youtube-api` | 10 | Shorts, scheduling, comments, OAuth, playlists |
+| `@packs/python-audio` | 10 | TTS, Chatterbox, Demucs, CUDA, sample rates |
+
+Your agent calls `recall("loudnorm issue")` and instantly gets the fix — without you ever debugging it.
+
+**Create your own:** See [agent-recall-packs](https://github.com/Thezenmonster/agent-recall-packs) for the format and contributing guide.
+
 ## Works Great With AgentScore
 
 [@agentscore-xyz/mcp-server](https://www.npmjs.com/package/@agentscore-xyz/mcp-server) lets your AI check the trust score of other AI agents. Pair it with agent-recall and your agent checks trust once, remembers it across sessions:

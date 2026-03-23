@@ -1,6 +1,6 @@
 {
   "name": "agent-recall",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Your AI coding assistant forgets everything between sessions. Fix it in one command.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

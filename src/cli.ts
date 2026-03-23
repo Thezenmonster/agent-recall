@@ -76,4 +76,41 @@ program
     mem.close();
   });
 
+program
+  .command("install <source>")
+  .description("Install a knowledge pack. Use @packs/<name> for registry or path/to/pack.json for local.")
+  .option("--db <path>", "Database path")
+  .action(async (source, opts) => {
+    const { installPack } = require("./packs");
+    const mem = new Memory({ dbPath: opts.db });
+    try {
+      const result = await installPack(mem, source);
+      console.log(`Installed pack: ${result.name}`);
+      console.log(`  ${result.installed} memories added, ${result.skipped} skipped (duplicates)`);
+    } catch (e: any) {
+      console.error(`Error: ${e.message}`);
+      process.exit(1);
+    }
+    mem.close();
+  });
+
+program
+  .command("packs")
+  .description("List installed knowledge packs")
+  .option("--db <path>", "Database path")
+  .action((opts) => {
+    const { listInstalledPacks } = require("./packs");
+    const mem = new Memory({ dbPath: opts.db });
+    const packs = listInstalledPacks(mem);
+    if (packs.length === 0) {
+      console.log("No packs installed. Try: npx agent-recall install @packs/ffmpeg");
+    } else {
+      console.log("Installed packs:");
+      for (const p of packs) {
+        console.log(`  ${p.name}: ${p.count} memories`);
+      }
+    }
+    mem.close();
+  });
+
 program.parse();

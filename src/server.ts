@@ -116,6 +116,21 @@ export async function startServer(options: {
           properties: {},
         },
       },
+      {
+        name: "install_pack",
+        description:
+          "Install a knowledge pack — pre-built memories for a specific domain (e.g. @packs/ffmpeg, @packs/react). Gives you instant expertise without learning from scratch.",
+        inputSchema: {
+          type: "object" as const,
+          properties: {
+            source: {
+              type: "string",
+              description: "Pack name (@packs/ffmpeg) or path to local .json file.",
+            },
+          },
+          required: ["source"],
+        },
+      },
     ],
   }));
 
@@ -209,6 +224,19 @@ export async function startServer(options: {
         }
         return {
           content: [{ type: "text" as const, text: "No previous session found." }],
+        };
+      }
+
+      case "install_pack": {
+        const { installPack } = await import("./packs");
+        const result = await installPack(mem, args!.source as string);
+        return {
+          content: [
+            {
+              type: "text" as const,
+              text: `Installed pack: ${result.name}\n${result.installed} memories added, ${result.skipped} skipped (duplicates)`,
+            },
+          ],
         };
       }
 
